@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-back-button defaultHref="/"></ion-back-button> -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My-profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-item>
+        <ion-label position="stacked"> Email </ion-label>
+        <h3>{{user?.email}}</h3>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label position="stacked"> Name </ion-label>
+        <h3>{{user?.name}}</h3>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label position="stacked"> Gender </ion-label>
+        <h3>{{user?.gender}}</h3>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label position="stacked"> City </ion-label>
+        <h3>{{user?.city}}</h3>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+      <ion-item>
+        <ion-label> Interests :</ion-label>
+        <p>
+          <ng-container *ngFor="let inter of user?.interests">
+            <span>{{inter}},</span>
+          </ng-container>
+        </p>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label> Photos :</ion-label>
+        <ion-list>
+          <ion-item *ngFor="let item of images">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="item.src"></ion-img>
+            </ion-thumbnail>
+            <ion-label class="ion-text-center">{{item.name}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label slot="end">
+          <a [routerLink]="['/sliders']" routerLinkActive="router-link-active"
+            >more</a
+          >
+        </ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label position="stacked"> Mobile </ion-label>
+        <h3>{{user?.mobile}}</h3>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item class="ion-text-center">
+        <a [routerLink]="['/edit']" routerLinkActive="router-link-active"
+          >Edit</a
+        >
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+</ion-content>

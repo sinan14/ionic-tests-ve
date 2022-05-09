@@ -1,0 +1,161 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-back-button defaultHref="/"></ion-back-button> -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Fill the details</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input
+                name="email"
+                type="email"
+                formControlName="email"
+                placeholder="your@email.com"
+              ></ion-input>
+              <small style="color: red" *ngIf="isInvalid('email')">
+                <span *ngIf="form.get('email').errors['required']"
+                  >Required!
+                </span>
+              </small>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                type="name"
+                placeholder="Name"
+                formControlName="name"
+              ></ion-input>
+              <small style="color: red" *ngIf="isInvalid('name')">
+                Required</small
+              >
+            </ion-item>
+            <ion-list>
+              <ion-radio-group formControlName="gender">
+                <ion-list-header>
+                  <ion-label>Gender</ion-label>
+                </ion-list-header>
+
+                <ion-item>
+                  <ion-label>Male</ion-label>
+                  <ion-radio slot="start" value="male"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>Female</ion-label>
+                  <ion-radio slot="start" value="female"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+              <small style="color: red" *ngIf="isInvalid('gender')">
+                Please choose gender</small
+              >
+
+              <ion-item>
+                <ion-label>City</ion-label>
+                <ion-select formControlName="city" placeholder="Select city">
+                  <ion-select-option *ngFor="let city of cities" [value]="city"
+                    >{{city}}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <small style="color: red" *ngIf="isInvalid('city')">
+                Please select an option</small
+              >
+              <ion-item>
+                <ion-label
+                  position="stacked"
+                  ng2FileDrop
+                  [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                  (fileOver)="fileOverBase($event)"
+                  [uploader]="uploader"
+                  >Photo upload
+                </ion-label>
+                <div
+                  style="display: block; margin-top: 24px"
+                  class="file-input-container"
+                >
+                  <label>
+                    <input
+                      type="file"
+                      #myInput
+                      id="photoInput"
+                      ng2FileSelect
+                      [uploader]="uploader"
+                      multiple
+                    />
+
+                    Add Files
+                  </label>
+                </div>
+                <h2>Files: {{ uploader?.queue?.length }}</h2>
+                <ion-list>
+                  <ion-reorder-group
+                    (ionItemReorder)="reorderFiles($event)"
+                    disabled="false"
+                  >
+                    <ion-item *ngFor="let item of uploader.queue">
+                      <ion-label> {{ item?.file?.name }} </ion-label>
+                      <ion-reorder></ion-reorder>
+                    </ion-item>
+                  </ion-reorder-group>
+                  <small
+                    style="color: red"
+                    *ngIf="getFiles().length===0 && attempted"
+                  >
+                    Please upload photo</small
+                  >
+                </ion-list>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="fixed">Mobile</ion-label>
+                <ion-input
+                  name="mobile"
+                  type="number"
+                  placeholder="9995118880"
+                  formControlName="mobile"
+                ></ion-input>
+                <small style="color: red" *ngIf="isInvalid('mobile')">
+                  Please select an option</small
+                >
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Interests</ion-label>
+                <ion-select formControlName="interests" multiple="true">
+                  <ion-select-option
+                    *ngFor="let interest of interests"
+                    [value]="interest"
+                    >{{interest}}</ion-select-option
+                  >
+                </ion-select>
+                <small style="color: red" *ngIf="isInvalid('interests')">
+                  Please select an option</small
+                >
+              </ion-item>
+            </ion-list>
+          </div>
+          <div padding>
+            <ion-button
+              size="large"
+              type="submit"
+              expand="block"
+              [class.invalid]="true"
+              >Submit</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

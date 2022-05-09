@@ -1,0 +1,29 @@
+<ion-content>
+  <!-- Default -->
+  <ion-modal [isOpen]="isOpenFlag">
+    <ng-template>
+      <ion-content>
+        <ion-item>
+          <swiper
+            [slidesPerView]="1"
+            [spaceBetween]="50"
+            (swiper)="onSwiper($event)"
+            (slideChange)="onSlideChange()"
+            [navigation]="true"
+            [pagination]="{ clickable: true }"
+            [scrollbar]="{ draggable: true }"
+          >
+            <ng-container *ngFor="let item of images">
+              <ng-template swiperSlide>
+                <ion-img [src]="item.src"></ion-img>
+              </ng-template>
+            </ng-container>
+          </swiper>
+        </ion-item>
+        <ion-item>
+          <ion-button (click)="close()"> Close </ion-button>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

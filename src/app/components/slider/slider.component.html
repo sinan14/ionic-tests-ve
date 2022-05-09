@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-item>
+    <swiper
+      [slidesPerView]="1"
+      [spaceBetween]="50"
+      [navigation]="false"
+      [pagination]="{ clickable: true }"
+      [scrollbar]="{ draggable: false }"
+    >
+      <ng-container *ngFor="let item of images">
+        <ng-template swiperSlide>
+          <ion-img [src]="item"></ion-img>
+        </ng-template>
+      </ng-container>
+    </swiper>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="close()"> Close </ion-button>
+  </ion-item>
+</ion-content>

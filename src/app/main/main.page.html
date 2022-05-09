@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>main</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <form [formGroup]="form" (ngSubmit)="saveDetails()">
+      <ion-list>
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="floating">Your Name</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <small *ngIf="isValid('name')">
+          <small *ngIf="(form.get('name')).errors?.required"
+            >Name is required</small
+          >
+          <!--question mark(?) is a safe navigation operator-->
+          <small *ngIf="(form.get('name')).errors?.minlength"
+            >Please enter more than 4 character</small
+          >
+        </small>
+
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="floating">Your Email address</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+
+        <div *ngIf="isValid('email')">
+          <small *ngIf="(form.get('email')).errors?.required"
+            >Email is required</small
+          >
+          <!--question mark(?) is a safe navigation operator-->
+          <small *ngIf="(form.get('email')).errors?.pattern"
+            >Please provide a valid email address</small
+          >
+        </div>
+        <div class="flex"></div>
+        <ion-radio-group formControlName="gender">
+          <ion-col>
+            <ion-item> Gender </ion-item>
+          </ion-col>
+          <ion-col *ngFor="let gender of genders">
+            <ion-item>
+              <ion-label>{{gender}}</ion-label>
+              <ion-radio [value]="gender"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-radio-group>
+        <small *ngIf="isValid('gender')"> gender required. </small>
+
+        <ion-item class="ion-margin-bottom">
+          <ion-label>Cities</ion-label>
+          <ion-select formControlName="city">
+            <ion-select-option
+              *ngFor="let interest of cities"
+              [value]="interest"
+              >{{interest}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <small *ngIf="isValid('city')"> City required. </small>
+
+        <ion-label for="file">File</ion-label>
+        <ion-input
+          formControlName="file"
+          id="file"
+          type="file"
+          class="form-control"
+          multiple=""
+          (change)="onFileChange($event)"
+        ></ion-input>
+        <small *ngIf="isValid('fileSource')">Photo required </small>
+        <div
+          *ngIf="f.file.touched && f.file.invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f.file.errors && f.file.errors.required">
+            File is required.
+          </div>
+        </div>
+        <ion-list>
+          <ion-item *ngFor="let url of form.get('fileSource')?.value">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="url"></ion-img>
+            </ion-thumbnail>
+            <ion-icon
+              (click)="deselectImage(url)"
+              name="close-outline"
+            ></ion-icon>
+          </ion-item>
+        </ion-list>
+
+        <ion-item class="ion-margin-bottom">
+          <ion-label>Interests</ion-label>
+          <ion-select formControlName="interests" multiple="true">
+            <ion-select-option
+              *ngFor="let interest of interests"
+              [value]="interest"
+              >{{interest}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <small *ngIf="isValid('interests')"> Interests required. </small>
+
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="floating">Mobile</ion-label>
+          <ion-input type="number" formControlName="mobile"></ion-input>
+        </ion-item>
+        <small *ngIf="isValid('mobile')"> Mobile is required. </small>
+
+        <ion-item class="ion-float-center" lines="none">
+          <ion-button color="primary" type="submit">Save Details</ion-button>
+          <!-- <ion-button color="primary" (click)="onReset()"
+            >Reset Form</ion-button
+          > -->
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>

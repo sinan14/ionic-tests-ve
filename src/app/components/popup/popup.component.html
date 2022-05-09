@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-grid class="ion-grid-padding ion-margin">
+    <ion-row>
+      <h2 color="primary">This is the {{ modalTitle }}</h2>
+    </ion-row>
+    <ion-row>
+      <p>
+        {{ modalDescription }}
+      </p>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-button (click)="close()"> Close </ion-button>
+  </ion-item>
+</ion-content>

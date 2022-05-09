@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item> Email :</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item> {{user?.email}} </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item> Name :</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item> {{user?.name}} </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item> Gender :</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item> {{user?.gender}} </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item> City :</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item> {{user?.city}} </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item> Interests :</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <span *ngFor="let inter of user?.interests"> {{inter}}, </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item> photos :</ion-item>
+      </ion-col>
+      <ion-col>
+        <!-- <ion-row> -->
+        <ion-list>
+          <ion-item *ngFor="let item of user?.fileSource">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="item"></ion-img>
+            </ion-thumbnail>
+          </ion-item>
+        </ion-list>
+        <!-- </ion-row> -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item style="margin: 0 auto" (click)="openSlider()">
+        <a style="text-decoration: underline"> more </a>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item> Mobile:</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item> {{user?.mobile}} </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <a
+        style="display: inline-block; margin: 0 auto"
+        [routerLink]="['/update']"
+        routerLinkActive="router-link-active"
+        class="text-center"
+      >
+        Edit
+      </a>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- <ion-card>
+  <ion-item>
+    <ion-label>
+      <h3>John Doe</h3>
+      <p>Dec 10, 2019</p>
+    </ion-label>
+  </ion-item>
+  <img src="" alt="ion" />
+  <ion-card-header>
+    <ion-card-title>Hotel Panama Garden</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis
+    mollis ligula sed ultrices.
+  </ion-card-content>
+  <ion-footer>
+    <ion-row>
+      <ion-col center text-center>
+        <button>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>1.5k Likes</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button>
+          <ion-icon name="time"></ion-icon>
+          <div>11h ago</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>
+</ion-card> -->
